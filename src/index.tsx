@@ -7,10 +7,14 @@ import Page from './page';
 const app = document.getElementById('app');
 const root = createRoot(app);
 
-root.render((
-    <BrowserRouter>
-        <Routes>
-            <Route path="/" element={<Page />} />
-        </Routes>    
-    </BrowserRouter>
-));
+const App = () => {
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Page />} />
+            </Routes>    
+        </BrowserRouter>
+    );
+};
+
+root.render(<App />);
