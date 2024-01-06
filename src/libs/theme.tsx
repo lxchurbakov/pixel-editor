@@ -6,4 +6,6 @@ export const colors = {
 
     f0: '#f0f0f0',
     dd: '#dddddd',
+
+    white: '#ffffff',
 };
