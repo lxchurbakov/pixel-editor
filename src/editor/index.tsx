@@ -46,12 +46,9 @@ export const Editor = ({ ...props }: {} & BaseProps) => {
         const modes = new Modes();
 
         const drag = new Drag(canvas, events, modes);
-        const draw = new Draw(canvas, events, modes, drag);
+        const draw = new Draw(events, modes, drag);
 
-        plugRef.current = { modes };
-
-        // // Connect moes
-        // modes.onUpdate.subscribe(setMode);
+        plugRef.current = { modes, draw };
     }, []);
     
     React.useEffect(() => {
@@ -62,13 +59,19 @@ export const Editor = ({ ...props }: {} & BaseProps) => {
         plugRef.current.modes.set(mode);        
     }, [mode]);
 
+    const setPlugwareColor = React.useCallback((color: string) => {
+        if (plugRef.current?.draw) {
+            plugRef.current.draw.setColor(color);
+        }
+    }, []);
+
     return (
         <Relative {...props}>
             <Base w="100%" h="100%" ref={rootRef} style={{ overflow: 'hidden' }} />
 
             <Positioned gap="24px">
                 <Selector modes={MODES} mode={mode} onChange={setMode} />
-                <Brush />
+                <Brush onChangeColor={setPlugwareColor} />
             </Positioned>
         </Relative>
     );

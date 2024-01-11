@@ -13,11 +13,8 @@ const match = (a: Point, b: Point) => {
 };
 
 export default class {
-    private pixels = [
-        { position: { x: 10, y: 10 }, color: '#ff0000' },
-        { position: { x: 10, y: 11 }, color: '#ff0000' },
-        { position: { x: 10, y: 12 }, color: '#ff0000' },
-    ];
+    private color = '#ff0000';
+    private pixels = [];
 
     private findIndexByPosition = (position) => {
         return this.pixels.findIndex((p) => match(p.position, position));
@@ -50,7 +47,7 @@ export default class {
                 const x = Math.floor(position.x / GRID_SIZE);
                 const y = Math.floor(position.y / GRID_SIZE);
 
-                this.pixels.push({ position: { x, y }, color: "#ff0000" });
+                this.pixels.push({ position: { x, y }, color: this.color });
             }
         });
 
@@ -77,10 +74,10 @@ export default class {
                         y: Math.round(((current.y - last.y) / diff) * i) + last.y,
                     };
 
-                    this.pixels.push({ position, color: "#ff0000" });
+                    this.pixels.push({ position, color: this.color });
                 }
             } else {
-                this.pixels.push({ position: current, color: "#ff0000" });
+                this.pixels.push({ position: current, color: this.color });
             }   
             
             last = current;
@@ -92,4 +89,8 @@ export default class {
             this.cleanupPixels();
         });
     }
+
+    public setColor = (color: string) => {
+        this.color = color;
+    };
 };
