@@ -5,9 +5,11 @@ PP: Pixel Editor Application
 ## Roadmap
 
 - [x] Basic Drawing
-- [ ] Palette for brush tool
+- [x] Palette for brush tool
 - [ ] Eraser tool
 
 - [ ] Layers with transparency
 - [ ] Export and Import
 
+- [ ] Fill Tool
+- [ ] Color Picker Tool
