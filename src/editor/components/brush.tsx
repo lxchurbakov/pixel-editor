@@ -11,7 +11,7 @@ const Wrap = styled(Card)`
     position: relative;
 `;
 
-const Knob = ({ selected, color, onClick, text, ...props }: any) => {
+const Knob = ({ selected, color, onClick, text, children, ...props }: any) => {
     return (
         <Relative {...props}>
             <Clickable
@@ -21,7 +21,9 @@ const Knob = ({ selected, color, onClick, text, ...props }: any) => {
                 radius="32px" 
                 style={{ border: selected ? '3px solid #333333' : 'none' }}
                 onClick={onClick}
-            />
+            >
+                {children}
+            </Clickable>
 
             {text && (
                 <Absolute bottom="-2px" right="-2px" style={{ zIndex: 10, pointerEvents: 'none' }}>
@@ -41,14 +43,14 @@ const Knob = ({ selected, color, onClick, text, ...props }: any) => {
     );
 };
 
-const ColorKnob = ({ selected, color, onChangeColor, text }) => {
+const ColorKnob = ({ selected, color, onChangeColor, onSelect, text }) => {
     const [visible, setVisible] = React.useState(false);
     const show = React.useCallback(() => setVisible(true), [setVisible]);
     const hide = React.useCallback(() => setVisible(false), [setVisible]);
 
     return (
         <Relative ref={useClickOutside(hide)}>
-            <Knob selected={selected} color={color} text={text} onClick={show} />
+            <Knob selected={selected} color={color} text={text} onClick={() => {show(); onSelect(); }} />
 
             {visible && (
                 <Absolute top="-235px" left="-60px">
@@ -68,7 +70,7 @@ export const Brush = ({ onChangeColor, ...props }) => {
         setBrushColors(($) => $.map(($$, j) => index === j ? color : $$))
     , [setBrushColors]);
 
-    const [selected, setSelected] = React.useState(1);
+    const [selected, setSelected] = React.useState(0 as number | 'erase');
 
     useListener(window, 'keydown', (e) => {
         const offset = (e as any).keyCode - 49;
@@ -78,20 +80,39 @@ export const Brush = ({ onChangeColor, ...props }) => {
                 setSelected(offset);
             }
         }
+
+        if ((e as any).code === 'KeyE') {
+            setSelected('erase');
+        }
     }, [setSelected, brushColors]);
 
     React.useEffect(() => {
-        onChangeColor(brushColors[selected]);
+        if (selected === 'erase') {
+            onChangeColor(null);
+        } else {
+            onChangeColor(brushColors[selected]);
+        }
+        
     }, [brushColors, selected]);
+
+    const add = React.useCallback(() => {
+        setBrushColors(($) => $.concat(['#bbbbbb']));
+    }, []);
 
     return (
         <Wrap {...props} radius="4px" background={colors.dd}>
-            <Flex gap="4px" p="12px">
+            <Flex gap="4px" p="10px 12px">
                 {brushColors.map((color, index) => (
-                    <ColorKnob selected={selected === index} key={index} color={color} text={index + 1} onChangeColor={($) => setBrushColor(index, $)} />
+                    <ColorKnob onSelect={() => setSelected(index)} selected={selected === index} key={index} color={color} text={index + 1} onChangeColor={($) => setBrushColor(index, $)} />
                 ))}
 
-                <Knob selected={false} color="#bbb" />
+                <Knob onClick={add} color="#bbb" text="" selected={false}>
+                    <Flex w="100%" h="100%">
+                        <Text size="24px">+</Text>
+                    </Flex>
+                </Knob>
+
+                <Knob ml="24px" onClick={() => setSelected('erase')} color="#bbb" text="E" selected={selected === 'erase'} />
             </Flex>
         </Wrap>
     );
