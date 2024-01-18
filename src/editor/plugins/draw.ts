@@ -21,14 +21,14 @@ export default class {
     };
     
     private cleanupPixels = () => {
-        this.pixels = this.pixels.filter((p, $index) => {
+        this.pixels = this.pixels.reverse().filter((p, $index) => {
             const index = this.findIndexByPosition(p.position);
 
             return index === $index;
         });
     };
 
-    constructor (private canvas: Canvas, private events: Events, private modes: Modes, private drag: Drag) {
+    constructor (private events: Events, private modes: Modes, private drag: Drag) {
         this.drag.onRender.subscribe((context) => {
             this.pixels.forEach(({ position, color }) => {
                 context.fillStyle = color;
@@ -47,7 +47,7 @@ export default class {
                 const x = Math.floor(position.x / GRID_SIZE);
                 const y = Math.floor(position.y / GRID_SIZE);
 
-                this.pixels.push({ position: { x, y }, color: this.color });
+                this.paintPixel({ x, y });
             }
         });
 
@@ -74,10 +74,10 @@ export default class {
                         y: Math.round(((current.y - last.y) / diff) * i) + last.y,
                     };
 
-                    this.pixels.push({ position, color: this.color });
+                    this.paintPixel(position);
                 }
             } else {
-                this.pixels.push({ position: current, color: this.color });
+                this.paintPixel(current);
             }   
             
             last = current;
@@ -89,6 +89,14 @@ export default class {
             this.cleanupPixels();
         });
     }
+
+    public paintPixel = (position) => {
+        if (this.color === null) {
+            this.pixels = this.pixels.filter(($) => !match($.position, position));
+        } else {
+            this.pixels.push({ position, color: this.color });
+        }
+    };
 
     public setColor = (color: string) => {
         this.color = color;
