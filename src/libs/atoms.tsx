@@ -1,11 +1,7 @@
 import React from 'react';
-// import { createPortal } from 'react-dom';
 import styled, { css } from 'styled-components';
 
-// import { CloseOutline } from '@styled-icons/evaicons-outline/CloseOutline';
-
 import * as theme from './theme';
-// import { useListener, useAsyncMemo } from './hooks';
 
 export type PropsOf<T> = T extends React.FC<infer P> ? P : never;
 
@@ -136,50 +132,6 @@ export const Disabled = styled(Base)<{ disabled: boolean }>`
     `};
 `;
 
-// const ModalCard = styled(Card)`
-//     position: fixed;
-//     top: 0;
-//     left: 0;
-//     width: 100vw;
-//     height: 100vh;
-//     z-index: 50;
-//     overflow: hidden;
-// `;
-
-// const CloseModal = styled(Clickable)`
-//     position: absolute;
-//     top: 16px;
-//     right: 16px;
-//     z-index: 51;
-// `;
-
-// const modals = document.getElementById('modals');
-
-// export const Modal = ({ key, onClose, children, ...props }: React.PropsWithChildren<{ onClose?: () => void, key: string } & BaseProps>) => {
-//     useListener(window, 'keydown', (e: KeyboardEvent) => {
-//         if (e.key === 'Escape') {
-//             onClose();
-//         }
-//     }, [onClose]);
-
-//     return createPortal((
-//         <ModalCard color="#181B1DAA" {...props}>
-//             {onClose && (
-//                 <CloseModal onClick={onClose}>
-//                     <Flex dir="column">
-//                         <CloseOutline size={32} color="white" />
-//                         <Text size="14px" color="white" weight="400">ESC</Text>
-//                     </Flex>
-//                 </CloseModal>
-//             )}
-            
-//             <Flex w="100%" h="100%" justify="center" align="center">
-//                 {children}
-//             </Flex>
-//         </ModalCard>
-//     ), modals, key);
-// };
-
 export const Relative = styled(Base)`
     position: relative;
 `;
@@ -195,9 +147,3 @@ export const Absolute = styled(Base)`
 export const Tag = ({ color, weight, size, children, ...props }: any) => {
     return (<Card p={props.p || '0px 8px'} radius={props.radius || '4px'} {...props}><Text {...{ size, weight, color }}>{children}</Text></Card>)
 };
-
-// export const Async = ({ predicate, children }) => {
-//     const [value, loading, error] = useAsyncMemo(predicate, [predicate]);
-
-//     return children(value, loading, error);
-// };

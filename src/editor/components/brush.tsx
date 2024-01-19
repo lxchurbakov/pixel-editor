@@ -97,7 +97,7 @@ export const Brush = ({ onChangeColor, ...props }) => {
 
     const add = React.useCallback(() => {
         setBrushColors(($) => $.concat(['#bbbbbb']));
-    }, []);
+    }, [setBrushColors]);
 
     return (
         <Wrap {...props} radius="4px" background={colors.dd}>
