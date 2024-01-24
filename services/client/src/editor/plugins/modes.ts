@@ -1,4 +1,4 @@
-import { EventEmitter } from '/src/libs/events';
+import { EventEmitter } from 'libs/events';
 
 import { Drag } from '@styled-icons/fluentui-system-filled/Drag';
 import { Paint } from '@styled-icons/boxicons-regular/Paint';

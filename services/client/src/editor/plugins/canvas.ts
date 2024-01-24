@@ -1,4 +1,4 @@
-import { EventEmitter } from '/src/libs/events';
+import { EventEmitter } from 'libs/events';
 
 export type Point = { x: number, y: number };
 export type Rect = { width: number, height: number };

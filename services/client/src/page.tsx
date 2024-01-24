@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Editor } from '/src/editor';
+import { Editor } from './editor';
 
 export default () => {
     return (

@@ -1,7 +1,7 @@
 import Canvas from './canvas';
 import Events from './events';
 import Modes from './modes';
-import { EventEmitter } from '/src/libs/events';
+import { EventEmitter } from 'libs/events';
 
 const SPACE = 32;
 

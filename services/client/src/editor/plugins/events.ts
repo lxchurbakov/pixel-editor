@@ -1,4 +1,4 @@
-import { EventEmitter } from '/src/libs/events';
+import { EventEmitter } from 'libs/events';
 import { Point, Rect } from './canvas';
 
 /**

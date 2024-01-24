@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 import { BlockPicker } from 'react-color';
 
-import { Relative, Absolute, Clickable, Card, Flex, Text } from '/src/libs/atoms';
-import { colors } from '/src/libs/theme';
-import { useListener, useClickOutside } from '/src/libs/hooks';
+import { Relative, Absolute, Clickable, Card, Flex, Text } from 'libs/atoms';
+import { colors } from 'libs/theme';
+import { useListener, useClickOutside } from 'libs/hooks';
 
 const Wrap = styled(Card)`
     position: relative;

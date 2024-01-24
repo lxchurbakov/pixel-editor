@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Clickable, Flex, Card, BaseProps, Text, Relative, Base } from '/src/libs/atoms';
-import { colors } from '/src/libs/theme';
+import { Clickable, Flex, Card, BaseProps, Text, Relative, Base } from 'libs/atoms';
+import { colors } from 'libs/theme';
 
 import { Drag as DragIcon } from '@styled-icons/fluentui-system-filled/Drag';
 import { Paint } from '@styled-icons/boxicons-regular/Paint';

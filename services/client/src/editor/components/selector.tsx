@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Card, Flex, Base, Clickable } from '/src/libs/atoms';
-import { colors } from '/src/libs/theme';
+import { Card, Flex, Base, Clickable } from 'libs/atoms';
+import { colors } from 'libs/theme';
 
 const Wrap = styled(Card)`
     position: relative;
