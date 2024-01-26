@@ -9,7 +9,8 @@
   "author": "",
   "license": "ISC",
   "workspaces": [
-    "services/client"
+    "services/client",
+    "services/server"
   ],
   "devDependencies": {
     "@types/react": "^18.2.48",
