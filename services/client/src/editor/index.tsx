@@ -17,6 +17,7 @@ import Drag from './plugins/drag';
 
 import { Selector } from './components/selector';
 import { Brush } from './components/brush';
+import { SharedDataView } from './components/shared-data-view';
 
 const Positioned = styled(Flex)`
     position: fixed;
@@ -69,9 +70,10 @@ export const Editor = ({ ...props }: {} & BaseProps) => {
         <Relative {...props}>
             <Base w="100%" h="100%" ref={rootRef} style={{ overflow: 'hidden' }} />
 
-            <Positioned gap="24px">
+            <Positioned gap="8px">
                 <Selector modes={MODES} mode={mode} onChange={setMode} />
                 <Brush onChangeColor={setPlugwareColor} />
+                <SharedDataView />
             </Positioned>
         </Relative>
     );
